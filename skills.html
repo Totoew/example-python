@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Vacancies Analytics</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <main class="main">
+        <div class="images">
+            {% if skills_count_image.image %}
+            <img src='{{ skills_count_image.image.url }}' alt="{{ skills_count_image.name }}">
+            {% else %}
+                <p>Изображение не доступно</p>
+            {% endif %}
+        </div>
+        <h2 class="skills-title">Топ-20 навыков</h2>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Позиция</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
+                    <th>19</th>
+                    <th>20</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in year_skills %}
+                    <tr>
+                        <td>{{ row.year }}</td>
+                        <td>{{ row.skill1 }}</td>
+                        <td>{{ row.skill2 }}</td>
+                        <td>{{ row.skill3 }}</td>
+                        <td>{{ row.skill4 }}</td>
+                        <td>{{ row.skill5 }}</td>
+                        <td>{{ row.skill6 }}</td>
+                        <td>{{ row.skill7 }}</td>
+                        <td>{{ row.skill8 }}</td>
+                        <td>{{ row.skill9 }}</td>
+                        <td>{{ row.skill10 }}</td>
+                        <td>{{ row.skill11 }}</td>
+                        <td>{{ row.skill12 }}</td>
+                        <td>{{ row.skill13 }}</td>
+                        <td>{{ row.skill14 }}</td>
+                        <td>{{ row.skill15 }}</td>
+                        <td>{{ row.skill16 }}</td>
+                        <td>{{ row.skill17 }}</td>
+                        <td>{{ row.skill18 }}</td>
+                        <td>{{ row.skill19 }}</td>
+                        <td>{{ row.skill20 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2 class="skills-title">Топ-20 навыков для Frontend-программист</h2>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Позиция</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
+                    <th>17</th>
+                    <th>18</th>
+                    <th>19</th>
+                    <th>20</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in year_skills_vac %}
+                    <tr>
+                        <td>{{ row.year }}</td>
+                        <td>{{ row.skill1 }}</td>
+                        <td>{{ row.skill2 }}</td>
+                        <td>{{ row.skill3 }}</td>
+                        <td>{{ row.skill4 }}</td>
+                        <td>{{ row.skill5 }}</td>
+                        <td>{{ row.skill6 }}</td>
+                        <td>{{ row.skill7 }}</td>
+                        <td>{{ row.skill8 }}</td>
+                        <td>{{ row.skill9 }}</td>
+                        <td>{{ row.skill10 }}</td>
+                        <td>{{ row.skill11 }}</td>
+                        <td>{{ row.skill12 }}</td>
+                        <td>{{ row.skill13 }}</td>
+                        <td>{{ row.skill14 }}</td>
+                        <td>{{ row.skill15 }}</td>
+                        <td>{{ row.skill16 }}</td>
+                        <td>{{ row.skill17 }}</td>
+                        <td>{{ row.skill18 }}</td>
+                        <td>{{ row.skill19 }}</td>
+                        <td>{{ row.skill20 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    {% include 'footer.html' %}
+    <script>
+        function transposeTable(i) {
+            const originalTable = document.getElementsByClassName('skills-table').item(i);
+            const transposedTable = document.getElementsByClassName('skills-table').item(i);
+
+            const rows = Array.from(originalTable.rows);
+            const rowCount = rows.length;
+            const colCount = rows[0].cells.length;
+
+            transposedTable.innerHTML = '';
+            const thead = transposedTable.createTHead();
+            const tbody = transposedTable.createTBody();
+
+            for (let col = 0; col < colCount; col++) {
+                if (col === 0) {
+                    const newRow = thead.insertRow();
+                    for (let row = 0; row < rowCount; row++) {
+                        const newCell = document.createElement('th');
+                        newCell.textContent = rows[row].cells[col].textContent;
+                        newRow.appendChild(newCell);
+                    }
+                } else {
+                    const newRow = tbody.insertRow();
+                    for (let row = 0; row < rowCount; row++) {
+                        const newCell = newRow.insertCell();
+                        newCell.textContent = rows[row].cells[col].textContent;
+                    }
+                }
+                
+            }
+        }
+        transposeTable(0);
+        transposeTable(1);
+    </script>
+</body>
+</html>

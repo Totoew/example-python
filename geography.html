@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Vacancies Analytics</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <main class="main">
+        <div class="images">
+            {% if area_salary_image.image %}
+            <img src='{{ area_salary_image.image.url }}' alt="{{ area_salary_image.name }}" width="1200">
+            {% else %}
+                <p>Изображение не доступно</p>
+            {% endif %}
+        </div>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th width="500px">Город</th>
+                    <th>Зарплата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in area_salary %}
+                    <tr>
+                        <td>{{ row.area }}</td>
+                        <td>{{ row.salary }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th width="500px">Город</th>
+                    <th>Зарплата Frontend-программист</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in area_salary_vac %}
+                    <tr>
+                        <td>{{ row.area }}</td>
+                        <td>{{ row.salary }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="images">
+            {% if area_part_image.image %}
+            <img src="{{ area_part_image.image.url }}" alt="{{ area_part_image.name }}" width="1200">
+            {% else %}
+                <p>Изображение не доступно</p>
+            {% endif %}
+        </div>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th width="500px">Город</th>
+                    <th>Доля вакансий</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in area_part %}
+                    <tr>
+                        <td>{{ row.area }}</td>
+                        <td>{{ row.part }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th width="500px">Город</th>
+                    <th>Доля Frontend-программист</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in area_part_vac %}
+                    <tr>
+                        <td>{{ row.area }}</td>
+                        <td>{{ row.part }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

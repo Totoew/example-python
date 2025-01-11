@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+    <h1>Загрузка данных из CSV</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <label for="csv_file">Выберите файл:</label>
+            <input type="file" name="csv_file" id="csv_file">
+        </p>
+        <button type="submit" class="button">Загрузить</button>
+    </form>
+    <p><a href="..">Назад</a></p>
+{% endblock %}

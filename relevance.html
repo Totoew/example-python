@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Vacancies Analytics</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <main class="main">
+        <div class="images">
+            {% if year_salary_image.image %}
+            <img src='{{ year_salary_image.image.url }}' alt="{{ year_salary_image.name }}">
+            {% else %}
+                <p>Изображение не доступно</p>
+            {% endif %}
+            {% if year_count_image.image %}
+                <img src='{{ year_count_image.image.url }}' alt="{{ year_count_image.name }}" width="1200">
+            {% else %}
+                <p>Изображение не доступно</p>
+            {% endif %}
+        </div>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Зарплата</th>
+                    <th>Кол-во вакансий</th>
+                    <th>Зарплата<br>Frontend-программист</th>
+                    <th>Кол-во вакансий<br>Frontend-программист</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in year_analytics %}
+                    <tr>
+                        <td>{{ row.year }}</td>
+                        <td>{{ row.salary }}</td>
+                        <td>{{ row.count }}</td>
+                        <td>{{ row.salary_vac }}</td>
+                        <td>{{ row.count_vac }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Vacancies Analytics</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <main class="main">
+        <h2>
+            Последние вакансии Frontend-программист (hh.ru)
+        </h2>
+        <ol class="vacancies-list">
+            {% for vacancy in vacancies %}
+                <li>
+                    <h3>{{ vacancy.name }}</h3>
+                    <p>{{ vacancy.salary.message }}</p>
+                    <p>{{ vacancy.description|safe }}</p>
+                    <p>Навыки: {{ vacancy.key_skills }}</p>
+                    <p>Компания: {{ vacancy.employer }}</p>
+                    <p>Город: {{ vacancy.area }}</p>
+                    <p>Дата публикации: {{ vacancy.published_at }}</p>
+                </li>
+            {% endfor %}
+        </ol>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>
